@@ -1,658 +1,967 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dubdio - AI Dubbing for the World</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #4361ee;
-      --primary-dark: #3a56d4;
-      --secondary: #3f37c9;
-      --dark: #1a1a2e;
-      --light: #f8f9fa;
-      --gray: #6c757d;
-      --light-gray: #e9ecef;
-      --gradient: linear-gradient(135deg, #4361ee, #3f37c9);
-      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
-      --radius: 12px;
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Header */
-    .header {
-      background: var(--gradient);
-      color: white;
-      padding: 1.5rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0H60v5.373C57.215 2.135 51.865.5 45.373.5 34.724.5 26.5 8.724 26.5 19.373c0 6.492 1.635 11.842 4.873 14.627H0V0h54.627zM5.373 60H0v-5.373C2.785 57.865 8.135 59.5 14.627 59.5c10.649 0 18.873-8.224 18.873-18.873 0-6.492-1.635-11.842-4.873-14.627H60V60H5.373z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
-      opacity: 0.1;
-    }
-    
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: white;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .logo i {
-      font-size: 1.5rem;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav-links a {
-      color: rgba(255, 255, 255, 0.9);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-    
-    .nav-links a:hover {
-      color: white;
-    }
-    
-    .cta-button {
-      background-color: white;
-      color: var(--primary);
-      padding: 0.6rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-    
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-    
-    /* Hero Section */
-    .hero {
-      padding: 5rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .hero-content {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.2;
-    }
-    
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--gray);
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 3rem;
-    }
-    
-    .primary-button {
-      background: var(--gradient);
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-    
-    .primary-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-      background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
-    }
-    
-    .secondary-button {
-      background: white;
-      color: var(--primary);
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition);
-      border: 2px solid var(--primary);
-      cursor: pointer;
-    }
-    
-    .secondary-button:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-    
-    .hero-animation {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    
-    /* Features Section */
-    .section {
-      padding: 5rem 0;
-    }
-    
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    
-    .section-title h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: var(--dark);
-    }
-    
-    .section-title p {
-      color: var(--gray);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    
-    .feature {
-      background: white;
-      border-radius: var(--radius);
-      padding: 2rem;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      border: 1px solid var(--light-gray);
-    }
-    
-    .feature:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-    
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--gradient);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.5rem;
-      color: white;
-      font-size: 1.5rem;
-    }
-    
-    .feature h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      color: var(--dark);
-    }
-    
-    .feature p {
-      color: var(--gray);
-    }
-    
-    /* How It Works */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-    }
-    
-    .step {
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      background: white;
-      padding: 2rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      position: relative;
-      z-index: 1;
-    }
-    
-    .step-number {
-      width: 50px;
-      height: 50px;
-      background: var(--gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-    
-    .step-content h3 {
-      margin-bottom: 0.5rem;
-      color: var(--dark);
-    }
-    
-    .step-content p {
-      color: var(--gray);
-    }
-    
-    /* CTA Section */
-    .cta-section {
-      background: var(--gradient);
-      color: white;
-      padding: 5rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0H60v5.373C57.215 2.135 51.865.5 45.373.5 34.724.5 26.5 8.724 26.5 19.373c0 6.492 1.635 11.842 4.873 14.627H0V0h54.627zM5.373 60H0v-5.373C2.785 57.865 8.135 59.5 14.627 59.5c10.649 0 18.873-8.224 18.873-18.873 0-6.492-1.635-11.842-4.873-14.627H60V60H5.373z' fill='rgba(255,255,255,0.1)' fill-rule='evenodd'/%3E%3C/svg%3E");
-      opacity: 0.2;
-    }
-    
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .cta-content h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .cta-content p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-    }
-    
-    /* Footer */
-    .footer {
-      background: var(--dark);
-      color: white;
-      padding: 3rem 0;
-    }
-    
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    
-    .footer-logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .footer-logo i {
-      font-size: 1.2rem;
-    }
-    
-    .footer-about p {
-      opacity: 0.7;
-      margin-bottom: 1.5rem;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-    
-    .social-links a {
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-    
-    .social-links a:hover {
-      background: var(--primary);
-      transform: translateY(-3px);
-    }
-    
-    .footer-links h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-    
-    .footer-links h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background: var(--primary);
-    }
-    
-    .footer-links ul {
-      list-style: none;
-    }
-    
-    .footer-links li {
-      margin-bottom: 0.8rem;
-    }
-    
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.7);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    
-    .footer-links a:hover {
-      color: white;
-      padding-left: 5px;
-    }
-    
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.9rem;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const languageTabs = document.querySelectorAll(".language-tab");
+        const dubbedVideo = document.getElementById("dubbed-video");
+        const originalVideo = document.getElementById("original-video");
+        let isComparing = true;
+        let leaderVideo = null;
+
+        const defaultLang = "es"; // Set default dubbed language
+
+        // Sync currentTime of follower with leader
+        function syncTime(leader, follower) {
+          leader.addEventListener("timeupdate", () => {
+            if (isComparing && !follower.paused) {
+              return; // Don’t force sync if user is actively controlling the follower
+            }
+            if (Math.abs(leader.currentTime - follower.currentTime) > 0.3) {
+              follower.currentTime = leader.currentTime;
+            }
+          });
+        }
+
+        function setupSync() {
+          // Remove any previous event listeners
+          originalVideo.onplay = null;
+          dubbedVideo.onplay = null;
+
+          originalVideo.addEventListener("play", () => {
+            leaderVideo = originalVideo;
+          });
+
+          dubbedVideo.addEventListener("play", () => {
+            leaderVideo = dubbedVideo;
+          });
+
+          // Only sync time from leader to follower
+          syncTime(originalVideo, dubbedVideo);
+          syncTime(dubbedVideo, originalVideo);
+        }
+
+        function loadAndShowVideos(lang) {
+          if (lang === "original") {
+            isComparing = false;
+            dubbedVideo.classList.remove("active");
+            originalVideo.classList.add("active");
+            originalVideo.querySelector("source").src = `demo/original.mp4`;
+            originalVideo.load();
+            originalVideo.onloadeddata = () => {
+              originalVideo.currentTime = 0;
+            };
+          } else {
+            isComparing = true;
+            dubbedVideo.classList.add("active");
+            originalVideo.classList.add("active");
+            dubbedVideo.querySelector(
+              "source"
+            ).src = `demo/final_dubbed_${lang}.mp4`;
+            originalVideo.querySelector("source").src = `demo/original.mp4`;
+            dubbedVideo.load();
+            originalVideo.load();
+
+            dubbedVideo.onloadeddata = () => {
+              dubbedVideo.currentTime = 0;
+            };
+            originalVideo.onloadeddata = () => {
+              originalVideo.currentTime = 0;
+            };
+
+            setupSync();
+          }
+        }
+
+        // Initialize default view
+        loadAndShowVideos(defaultLang);
+
+        // Activate correct tab
+        languageTabs.forEach((tab) => {
+          tab.classList.toggle("active", tab.dataset.lang === defaultLang);
+        });
+
+        // Tab click handler
+        languageTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            languageTabs.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+            loadAndShowVideos(this.dataset.lang);
+          });
+        });
+      });
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dubdio - AI Dubbing for the World</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #4361ee;
+        --primary-dark: #3a56d4;
+        --secondary: #3f37c9;
+        --dark: #1a1a2e;
+        --light: #f8f9fa;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --gradient: linear-gradient(135deg, #4361ee, #3f37c9);
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --radius: 12px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       }
-      
-      .hero-buttons {
-        flex-direction: column;
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .header {
+        background: var(--gradient);
+        color: white;
+        padding: 1.5rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0H60v5.373C57.215 2.135 51.865.5 45.373.5 34.724.5 26.5 8.724 26.5 19.373c0 6.492 1.635 11.842 4.873 14.627H0V0h54.627zM5.373 60H0v-5.373C2.785 57.865 8.135 59.5 14.627 59.5c10.649 0 18.873-8.224 18.873-18.873 0-6.492-1.635-11.842-4.873-14.627H60V60H5.373z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.1;
+      }
+      .name{
+        margin-top:20px;
+        font-size:2rem;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        position: relative;
+        z-index: 1;
       }
-      
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo i {
+        font-size: 1.5rem;
+      }
+
       .nav-links {
-        display: none;
+        display: flex;
+        gap: 2rem;
       }
-      
-      .step {
+
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: white;
+      }
+
+      .cta-button {
+        background-color: white;
+        color: var(--primary);
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: var(--transition);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 5rem 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        color: var(--gray);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 3rem;
+      }
+
+      .primary-button {
+        background: var(--gradient);
+        color: white;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+
+      .primary-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--secondary)
+        );
+      }
+
+      .secondary-button {
+        background: white;
+        color: var(--primary);
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        border: 2px solid var(--primary);
+        cursor: pointer;
+      }
+
+      .secondary-button:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-animation {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      /* Features Section */
+      .section {
+        padding: 5rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+
+      .section-title p {
+        color: var(--gray);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature {
+        background: white;
+        border-radius: var(--radius);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        border: 1px solid var(--light-gray);
+      }
+
+      .feature:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .feature h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+
+      .feature p {
+        color: var(--gray);
+      }
+
+      /* How It Works */
+      .steps {
+        display: flex;
         flex-direction: column;
+        gap: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
       }
-    }
-  </style>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-</head>
-<body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <nav class="navbar">
-        <a href="#" class="logo">
-          <img src="logo.png" width="50"/> Dubdio
-        </a>
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How It Works</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
-    </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>AI-Powered Dubbing for a Borderless World</h1>
-        <p>Break language barriers and reach global audiences with our advanced AI dubbing technology. Perfect for creators, educators, and businesses.</p>
-        <div class="hero-buttons">
-          <a href="#" class="primary-button">Try It Free</a>
-          <a href="#" class="secondary-button">See Demo</a>
-        </div>
-        <div class="hero-animation">
-          <dotlottie-player src="https://lottie.host/999266f9-d1a6-4e54-a33e-68fb5056a460/JOQ71lBdwc.lottie" background="transparent" speed="1" style="width: 100%; height: auto" loop autoplay></dotlottie-player>
-        </div>
-      </div>
-    </div>
-  </section>
+      .step {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+        background: white;
+        padding: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        position: relative;
+        z-index: 1;
+      }
 
-  <!-- Features Section -->
-  <section class="section" id="features">
-    <div class="container">
-      <div class="section-title">
-        <h2>Powerful Features</h2>
-        <p>Everything you need to make your content accessible in any language</p>
-      </div>
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-language"></i>
-          </div>
-          <h3>Multi-Language Dubbing</h3>
-          <p>Generate natural-sounding dubbed content in 50+ languages with perfect lip-sync and emotional tone preservation.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-file-alt"></i>
-          </div>
-          <h3>Smart Transcripts</h3>
-          <p>Get accurate, time-coded transcripts in multiple formats including TXT, SRT, and VTT for easy subtitling.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-globe"></i>
-          </div>
-          <h3>Instant Translations</h3>
-          <p>Automatically translate your content while preserving context and cultural nuances for global audiences.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-music"></i>
-          </div>
-          <h3>Audio Export Options</h3>
-          <p>Download your dubbed audio in MP3, WAV, or other professional formats ready for integration.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-sliders-h"></i>
-          </div>
-          <h3>Audio Separation</h3>
-          <p>Isolate vocals from background music and effects for complete creative control over your content.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-robot"></i>
-          </div>
-          <h3>Voice Cloning</h3>
-          <p>Clone the speaker's voice, and instantly generate dubbed versions in other languages - sounding just like the original.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      .step-number {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
 
-  <!-- How It Works -->
-  <section class="section" id="how-it-works">
-    <div class="container">
-      <div class="section-title">
-        <h2>How Dubdio Works</h2>
-        <p>Transform your content in just three simple steps</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>Upload Your Content</h3>
-            <p>Simply upload your video or audio file. We support all major formats including MP4, MOV, MP3, and WAV.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>Choose Your Languages</h3>
-            <p>Select from our extensive list of target languages and preferred voice styles for your dubbing.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>Download & Share</h3>
-            <p>Receive your professionally dubbed content, transcripts, and translations ready for distribution.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      .step-content h3 {
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+      }
 
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content">
-        <h2>Ready to Go Global?</h2>
-        <p>Join thousands of creators and businesses expanding their reach with AI-powered dubbing.</p>
-        <a href="#" class="primary-button">Start Free Trial</a>
-      </div>
-    </div>
-  </section>
+      .step-content p {
+        color: var(--gray);
+      }
 
-  <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-about">
-          <div class="footer-logo">
-            <i class="fas fa-microphone-alt"></i> Dubdio
+      /* CTA Section */
+      .cta-section {
+        background: var(--gradient);
+        color: white;
+        padding: 5rem 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0H60v5.373C57.215 2.135 51.865.5 45.373.5 34.724.5 26.5 8.724 26.5 19.373c0 6.492 1.635 11.842 4.873 14.627H0V0h54.627zM5.373 60H0v-5.373C2.785 57.865 8.135 59.5 14.627 59.5c10.649 0 18.873-8.224 18.873-18.873 0-6.492-1.635-11.842-4.873-14.627H60V60H5.373z' fill='rgba(255,255,255,0.1)' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.2;
+      }
+
+      .cta-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .cta-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--dark);
+        color: white;
+        padding: 3rem 0;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .footer-logo i {
+        font-size: 1.2rem;
+      }
+
+      .footer-about p {
+        opacity: 0.7;
+        margin-bottom: 1.5rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-links a {
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-links h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer-links h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .footer-links ul {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: white;
+        padding-left: 5px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .step {
+          flex-direction: column;
+        }
+      }
+
+      .demo-container {
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .language-selector {
+        background: var(--light-gray);
+        padding: 1.5rem;
+      }
+
+      .selector-header {
+        margin-bottom: 1rem;
+      }
+
+      .selector-header h3 {
+        color: var(--dark);
+        font-size: 1.2rem;
+      }
+
+      .language-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .language-tab {
+        background: white;
+        border: 1px solid var(--light-gray);
+        border-radius: 50px;
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .language-tab:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .language-tab.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .video-comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding: 1.5rem;
+      }
+
+      .video-container {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      .demo-video {
+        width: 100%;
+        height: auto;
+        display: none;
+        border-radius: var(--radius);
+      }
+
+      .demo-video.active {
+        display: block;
+      }
+
+      .video-label {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 768px) {
+        .video-comparison {
+          grid-template-columns: 1fr;
+        }
+
+        .language-tabs {
+          overflow-x: auto;
+          padding-bottom: 10px;
+          flex-wrap: nowrap;
+        }
+      }
+    </style>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="navbar">
+          <a href="#" class="logo">
+           <span class="name">Dubdio</span> <img src="logo.png" width="50" /> 
+          </a>
+          <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#contact">Contact</a>
           </div>
-          <p>AI-powered dubbing and voice localization technology for the global digital age.</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>AI-Powered Dubbing for a Borderless World</h1>
+          <p>
+            Break language barriers and reach global audiences with our advanced
+            AI dubbing technology. Perfect for creators, educators, and
+            businesses.
+          </p>
+          <div class="hero-buttons">
+            <a href="#" class="primary-button">Try It Free</a>
+            <a href="#" class="secondary-button">See Demo</a>
           </div>
-        </div>
-        <div class="footer-links">
-          <h3>Product</h3>
-          <ul>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">API</a></li>
-            <li><a href="#">Integrations</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="#">Documentation</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Tutorials</a></li>
-            <li><a href="#">Support</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h3>Company</h3>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-          </ul>
+          <div class="hero-animation">
+            <dotlottie-player
+              src="https://lottie.host/999266f9-d1a6-4e54-a33e-68fb5056a460/JOQ71lBdwc.lottie"
+              background="transparent"
+              speed="1"
+              style="width: 100%; height: auto"
+              loop
+              autoplay
+            ></dotlottie-player>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Dubdio. All rights reserved.</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Powerful Features</h2>
+          <p>
+            Everything you need to make your content accessible in any language
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-language"></i>
+            </div>
+            <h3>Multi-Language Dubbing</h3>
+            <p>
+              Generate natural-sounding dubbed content in 50+ languages with
+              perfect lip-sync and emotional tone preservation.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <h3>Smart Transcripts</h3>
+            <p>
+              Get accurate, time-coded transcripts in multiple formats including
+              TXT, SRT, and VTT for easy subtitling.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h3>Instant Translations</h3>
+            <p>
+              Automatically translate your content while preserving context and
+              cultural nuances for global audiences.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-music"></i>
+            </div>
+            <h3>Audio Export Options</h3>
+            <p>
+              Download your dubbed audio in MP3, WAV, or other professional
+              formats ready for integration.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-sliders-h"></i>
+            </div>
+            <h3>Audio Separation</h3>
+            <p>
+              Isolate vocals from background music and effects for complete
+              creative control over your content.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3>Voice Cloning</h3>
+            <p>
+              Clone the speaker's voice, and instantly generate dubbed versions
+              in other languages - sounding just like the original.
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
-</body>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-title">
+          <h2>How Dubdio Works</h2>
+          <p>Transform your content in just three simple steps</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Upload Your Content</h3>
+              <p>
+                Simply upload your video or audio file. We support all major
+                formats including MP4, MOV, MP3, and WAV.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Choose Your Languages</h3>
+              <p>
+                Select from our extensive list of target languages and preferred
+                voice styles for your dubbing.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Download & Share</h3>
+              <p>
+                Receive your professionally dubbed content, transcripts, and
+                translations ready for distribution.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="section-title">
+          <h2>See It In Action</h2>
+          <p>
+            Experience how our AI dubbing transforms content across languages
+          </p>
+        </div>
+
+        <div class="demo-container">
+          <div class="language-selector">
+            <div class="selector-header">
+              <h3>Select Language:</h3>
+            </div>
+            <div class="language-tabs">
+              <button class="language-tab" data-lang="es">Spanish (ES)</button>
+              <button class="language-tab" data-lang="fr">French (FR)</button>
+              <button class="language-tab" data-lang="de">German (DE)</button>
+              <button class="language-tab" data-lang="pt">
+                Portuguese (PT)
+              </button>
+              <button class="language-tab" data-lang="tr">Turkish (TR)</button>
+              <button class="language-tab" data-lang="hi">Hindi (HI)</button>
+              <button class="language-tab" data-lang="ar">Arabic (AR)</button>
+              <button class="language-tab" data-lang="zh">Chinese (ZH)</button>
+            </div>
+          </div>
+
+          <div class="video-comparison">
+            <div class="video-container">
+              <video
+                controls
+                class="demo-video"
+                id="original-video"
+                poster="demo/poster.jpg"
+              >
+                <source src="demo/original.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-label">Original Version</div>
+            </div>
+            <div class="video-container">
+              <video
+                controls
+                class="demo-video"
+                id="dubbed-video"
+                poster="demo/poster.jpg"
+                preload="auto"
+              >
+                <source type="video/mp4" />
+              </video>
+              <div class="video-label">Dubbed Version</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Go Global?</h2>
+          <p>
+            Join thousands of creators and businesses expanding their reach with
+            AI-powered dubbing.
+          </p>
+          <a href="#" class="primary-button">Start Free Trial</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-about">
+            <div class="footer-logo">
+              <i class="fas fa-microphone-alt"></i> Dubdio
+            </div>
+            <p>
+              AI-powered dubbing and voice localization technology for the
+              global digital age.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">API</a></li>
+              <li><a href="#">Integrations</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h3>Resources</h3>
+            <ul>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Tutorials</a></li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Dubdio. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
