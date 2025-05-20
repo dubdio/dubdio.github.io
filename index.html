@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="logo-original.png">
+    <link rel="icon" type="image/png" href="logo-original.png" />
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -161,9 +161,9 @@
         background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0H60v5.373C57.215 2.135 51.865.5 45.373.5 34.724.5 26.5 8.724 26.5 19.373c0 6.492 1.635 11.842 4.873 14.627H0V0h54.627zM5.373 60H0v-5.373C2.785 57.865 8.135 59.5 14.627 59.5c10.649 0 18.873-8.224 18.873-18.873 0-6.492-1.635-11.842-4.873-14.627H60V60H5.373z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
         opacity: 0.1;
       }
-      .name{
-        margin-top:20px;
-        font-size:2rem;
+      .name {
+        margin-top: 20px;
+        font-size: 2rem;
       }
 
       .navbar {
@@ -466,69 +466,68 @@
         padding: 3rem 0;
       }
 
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
-}
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 2rem;
+      }
 
-.footer-about {
-  flex: 1;
-  min-width: 300px;
-}
+      .footer-about {
+        flex: 1;
+        min-width: 300px;
+      }
 
-.footer-links-container {
-  display: flex;
-  flex: 2;
-  min-width: 300px;
-  justify-content: space-around;
-  gap: 2rem;
-}
+      .footer-links-container {
+        display: flex;
+        flex: 2;
+        min-width: 300px;
+        justify-content: space-around;
+        gap: 2rem;
+      }
 
-.footer-links {
-  min-width: 150px;
-}
+      .footer-links {
+        min-width: 150px;
+      }
 
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
 
-/* Responsive behavior */
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-about {
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 2rem;
-  }
-  
-  .footer-links-container {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .footer-logo{
-    justify-content: center;
-  }
-}
+      /* Responsive behavior */
+      @media (max-width: 768px) {
+        .footer-content {
+          flex-direction: column;
+          align-items: center;
+        }
 
-@media (max-width: 480px) {
-  .footer-links-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
+        .footer-about {
+          width: 100%;
+          max-width: 400px;
+          margin-bottom: 2rem;
+        }
 
+        .footer-links-container {
+          width: 100%;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .footer-logo {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .footer-links-container {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+      }
 
       .footer-logo {
         font-size: 1.5rem;
@@ -764,7 +763,14 @@
             businesses.
           </p>
           <div class="hero-buttons">
-            <a href="#" class="primary-button">Try It Free</a>
+            <a
+              class="primary-button"
+              href="mailto:info@dubdio.com?subject=Free%20Dubbing%20Request&body=Hi%2C%0A%0AI%20would%20like%20to%20try%20your%20free%20AI%20dubbing%20service.%0A%0AHere%20is%20my%20video%20link%3A%20%5Bpaste%20your%20link%20here%5D%0A%0AThanks%21"
+              style="text-decoration: none"
+              target="_blank"
+              >Try It Free</a
+            >
+
             <a href="#demo" class="secondary-button">See Demo</a>
           </div>
           <div class="hero-animation">
@@ -934,7 +940,10 @@
                 id="original-video"
                 poster="demo/poster.jpg"
               >
-                <source src="https://raw.githubusercontent.com/dubdio/dubdio.github.io/main/demo/original.mp4" type="video/mp4" />
+                <source
+                  src="https://raw.githubusercontent.com/dubdio/dubdio.github.io/main/demo/original.mp4"
+                  type="video/mp4"
+                />
                 Your browser does not support the video tag.
               </video>
               <div class="video-label">Original Version</div>
@@ -947,7 +956,7 @@
                 poster="demo/poster.jpg"
                 preload="auto"
               >
-                <source type="video/mp4"/>
+                <source type="video/mp4" />
               </video>
               <div class="video-label">Dubbed Version</div>
             </div>
@@ -965,57 +974,84 @@
             Join thousands of creators and businesses expanding their reach with
             AI-powered dubbing.
           </p>
-          <a href="#" class="primary-button">Start Free Trial</a>
+          <a  href="mailto:info@dubdio.com?subject=Free%20Dubbing%20Request&body=Hi%2C%0A%0AI%20would%20like%20to%20try%20your%20free%20AI%20dubbing%20service.%0A%0AHere%20is%20my%20video%20link%3A%20%5Bpaste%20your%20link%20here%5D%0A%0AThanks%21"
+              style="text-decoration: none"
+              target="_blank" class="primary-button">Try It Free</a>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-<footer class="footer" id="contact">
-  <div class="container">
-    <div class="footer-content">
-      <!-- First Column (Centered on small screens) -->
-      <div class="footer-about">
-        <div class="footer-logo">
-          <img src="logo-original.png" width="30px" alt="Dubdio Logo"/> Dubdio 
+    <footer class="footer" id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <!-- First Column (Centered on small screens) -->
+          <div class="footer-about">
+            <div class="footer-logo">
+              <img src="logo-original.png" width="30px" alt="Dubdio Logo" />
+              Dubdio
+            </div>
+            <p>
+              AI-powered voice cloning and dubbing for global content creators.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://x.com/dubdio_official"
+                target="_blank"
+                title="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                href="https://www.youtube.com/@dubdio"
+                target="_blank"
+                title="YouTube"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a
+                href="https://t.me/dubdio_support"
+                target="_blank"
+                title="Telegram"
+                ><i class="fab fa-telegram"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/dubdio_official"
+                target="_blank"
+                title="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="mailto:info@dubdio.com" title="Email us"
+                ><i class="fas fa-envelope"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Links Columns (Will stack together on small screens) -->
+          <div class="footer-links-container">
+            <div class="footer-links">
+              <h3>Quick Links</h3>
+              <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer-links">
+              <h3>Support</h3>
+              <ul>
+                <li>
+                  <a href="https://t.me/dubdio_support" target="_blank"
+                    >Telegram Support</a
+                  >
+                </li>
+                <li><a href="mailto:info@dubdio.com">Email Support</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <p>
-          AI-powered voice cloning and dubbing for global content creators.
-        </p>
-        <div class="social-links">
-          <a href="https://x.com/dubdio_official" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.youtube.com/@dubdio" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://t.me/dubdio_support" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
-          <a href="https://www.instagram.com/dubdio_official" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="mailto:info@dubdio.com" title="Email us"><i class="fas fa-envelope"></i></a>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Dubdio. All rights reserved.</p>
         </div>
       </div>
-      
-      <!-- Links Columns (Will stack together on small screens) -->
-      <div class="footer-links-container">
-        <div class="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h3>Support</h3>
-          <ul>
-            <li><a href="https://t.me/dubdio_support" target="_blank">Telegram Support</a></li>
-            <li><a href="mailto:info@dubdio.com">Email Support</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Dubdio. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+    </footer>
   </body>
 </html>
