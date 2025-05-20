@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/png" href="logo-original.png">
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const languageTabs = document.querySelectorAll(".language-tab");
@@ -464,12 +466,70 @@
         padding: 3rem 0;
       }
 
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 3rem;
-        margin-bottom: 3rem;
-      }
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-about {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.footer-links-container {
+  display: flex;
+  flex: 2;
+  min-width: 300px;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.footer-links {
+  min-width: 150px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-about {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-links-container {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer-logo{
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 
       .footer-logo {
         font-size: 1.5rem;
@@ -683,7 +743,7 @@
       <div class="container">
         <nav class="navbar">
           <a href="#" class="logo">
-           <span class="name">Dubdio</span> <img src="logo.png" width="50" /> 
+            <img src="logo.png" width="50" /> <span>Dubdio</span>
           </a>
           <div class="nav-links">
             <a href="#features">Features</a>
@@ -912,56 +972,51 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer" id="contact">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-about">
-            <div class="footer-logo">
-              <i class="fas fa-microphone-alt"></i> Dubdio
-            </div>
-            <p>
-              AI-powered dubbing and voice localization technology for the
-              global digital age.
-            </p>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
-          <div class="footer-links">
-            <h3>Product</h3>
-            <ul>
-              <li><a href="#">Features</a></li>
-              <li><a href="#">Pricing</a></li>
-              <li><a href="#">API</a></li>
-              <li><a href="#">Integrations</a></li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <h3>Resources</h3>
-            <ul>
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Tutorials</a></li>
-              <li><a href="#">Support</a></li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <h3>Company</h3>
-            <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul>
-          </div>
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-content">
+      <!-- First Column (Centered on small screens) -->
+      <div class="footer-about">
+        <div class="footer-logo">
+          <img src="logo-original.png" width="30px" alt="Dubdio Logo"/> Dubdio 
         </div>
-        <div class="footer-bottom">
-          <p>&copy; 2025 Dubdio. All rights reserved.</p>
+        <p>
+          AI-powered voice cloning and dubbing for global content creators.
+        </p>
+        <div class="social-links">
+          <a href="https://x.com/dubdio_official" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/@dubdio" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://t.me/dubdio_support" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.instagram.com/dubdio_official" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:info@dubdio.com" title="Email us"><i class="fas fa-envelope"></i></a>
         </div>
       </div>
-    </footer>
+      
+      <!-- Links Columns (Will stack together on small screens) -->
+      <div class="footer-links-container">
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="https://t.me/dubdio_support" target="_blank">Telegram Support</a></li>
+            <li><a href="mailto:info@dubdio.com">Email Support</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Dubdio. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
   </body>
 </html>
